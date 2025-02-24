@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Api_Film_P1.Models.EntityFramework
 {
     [Table("t_e_film_flm")]
+    [Index("flm_titre")]
     public class Film
     {
         [Key]
@@ -32,6 +33,6 @@ namespace Api_Film_P1.Models.EntityFramework
         public decimal Genre { get; set; }
 
         [InverseProperty("IdfilmNavigation")]
-        public virtual ICollection<Notation> Notations { get; set; } = new List<Notation>();
+        public virtual ICollection<Notation> NotesFilm { get; set; } = new List<Notation>();
     }
 }

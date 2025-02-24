@@ -23,7 +23,7 @@ namespace Api_Film_P1.Models.EntityFramework
         [StringLength(50)]
         public string? Prenom { get; set; }
 
-        [Column("utl_mobile")]
+        [Column("utl_mobile", TypeName = "char(10)")]
         [StringLength(10)]
         public string? Mobile { get; set; }
 
@@ -39,7 +39,7 @@ namespace Api_Film_P1.Models.EntityFramework
         [StringLength(64)]
         public string? Rue { get; set; }
 
-        [Column("utl_cp")]
+        [Column("utl_cp", TypeName = "char(5)")]
         [StringLength(5)]
         public string? CodePostal { get; set; }
 
@@ -61,7 +61,7 @@ namespace Api_Film_P1.Models.EntityFramework
         public DateTime DateCreation { get; set; } = DateTime.Now;
 
         [InverseProperty("IdutilisateurNavigation")]
-        public virtual ICollection<Notation> Notations { get; set; } = new List<Notation>();
+        public virtual ICollection<Notation> NotesUtilisateur { get; set; } = new List<Notation>();
 
     }
 }

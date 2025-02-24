@@ -20,12 +20,12 @@ namespace Api_Film_P1.Models.EntityFramework
         [Column("not_note")]
         public int Note { get; set; }
 
-        [ForeignKey(nameof(FilmId))]
-        [InverseProperty(nameof(Film.Notations))]
-        public virtual Film IdfilmNavigation { get; set; } = null!;
+        [ForeignKey("fk_not_flm")]
+        [InverseProperty(nameof(Film.NotesFilm))]
+        public virtual Film FilmNote { get; set; } = null!;
 
-        [ForeignKey(nameof(UtilisateurId))]
-        [InverseProperty(nameof(Utilisateur.Notations))]
-        public virtual Utilisateur IdutilisateurNavigation { get; set; } = null!;
+        [ForeignKey("fk_not_utl")]
+        [InverseProperty(nameof(Utilisateur.NotesUtilisateur))]
+        public virtual Utilisateur UtilisateurNotant { get; set; } = null!;
     }
 }
