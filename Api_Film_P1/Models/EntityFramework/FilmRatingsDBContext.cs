@@ -38,11 +38,13 @@ namespace Api_Film_P1.Models.EntityFramework
             modelBuilder.Entity<Utilisateur>(entity =>
             {
                 entity.HasKey(e => e.UtilisateurId).HasName("");
+                entity.HasIndex(u => u.Mail).IsUnique();
             });
 
             modelBuilder.Entity<Film>(entity =>
             {
                 entity.HasKey(e => e.FilmId).HasName("flm_id");
+                entity.HasIndex(u => u.Titre);
             });
 
             modelBuilder.Entity<Notation>(entity =>
