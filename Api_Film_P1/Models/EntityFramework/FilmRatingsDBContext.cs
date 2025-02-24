@@ -37,27 +37,29 @@ namespace Api_Film_P1.Models.EntityFramework
         {
             modelBuilder.Entity<Utilisateur>(entity =>
             {
-                entity.HasKey(e => e.UtilisateurId).HasName("");
+                entity.HasKey(e => e.UtilisateurId).HasName("pk_utl");
                 entity.HasIndex(u => u.Mail).IsUnique();
+                entity.Property(entity => entity.Pays).HasDefaultValue("France");
+                entity.Property(entity => entity.DateCreation).HasDefaultValueSql("now()");
             });
 
             modelBuilder.Entity<Film>(entity =>
             {
-                entity.HasKey(e => e.FilmId).HasName("flm_id");
+                entity.HasKey(e => e.FilmId).HasName("pk_flm");
                 entity.HasIndex(u => u.Titre);
             });
 
             modelBuilder.Entity<Notation>(entity =>
             {
-                entity.HasKey(e => new { e.FilmId, e.UtilisateurId}).HasName("pk_notation");
+                entity.HasKey(e => new { e.FilmId, e.UtilisateurId}).HasName("pk_not");
 
                 entity.HasOne(d => d.FilmNote).WithMany(p => p.NotesFilm)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_notation_film");
+                    .HasConstraintName("fk_not_flm");
 
                 entity.HasOne(d => d.UtilisateurNotant).WithMany(p => p.NotesUtilisateur)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("fk_notation_utilisateur");
+                    .HasConstraintName("fk_not_utl");
             });
 
             OnModelCreatingPartial(modelBuilder);

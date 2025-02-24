@@ -6,25 +6,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api_Film_P1.Models.EntityFramework
 {
+    [PrimaryKey(nameof(UtilisateurId), nameof(FilmId))]
     [Table("t_j_notation_not")]
     public class Notation
     {
         [Key]
-        [Column("flm_id")]
+        [Column("utl_id")]
         public int UtilisateurId { get; set; }
 
         [Key]
-        [Column("utl_id")]
+        [Column("flm_id")]
         public int FilmId { get; set; }
 
         [Column("not_note")]
+        [Range(0,5)]
         public int Note { get; set; }
 
-        [ForeignKey("fk_not_flm")]
+        [ForeignKey(nameof(FilmId))]
         [InverseProperty(nameof(Film.NotesFilm))]
         public virtual Film FilmNote { get; set; } = null!;
 
-        [ForeignKey("fk_not_utl")]
+        [ForeignKey(nameof(UtilisateurId))]
         [InverseProperty(nameof(Utilisateur.NotesUtilisateur))]
         public virtual Utilisateur UtilisateurNotant { get; set; } = null!;
     }

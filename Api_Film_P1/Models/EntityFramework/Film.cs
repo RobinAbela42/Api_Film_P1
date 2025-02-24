@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 namespace Api_Film_P1.Models.EntityFramework
 {
     [Table("t_e_film_flm")]
-    [Index("flm_titre")]
     public class Film
     {
         [Key]
@@ -23,16 +22,17 @@ namespace Api_Film_P1.Models.EntityFramework
         [Column("flm_resume")]
         public string? Resume { get; set; }
 
-        [Column("flm_datesortie")]
+        [Column("flm_datesortie" ,TypeName = "date")]
         public DateTime DateSortie { get; set; }
 
         [Column("flm_duree")]
         public decimal Duree { get; set; }
 
         [Column("flm_genre")]
-        public decimal Genre { get; set; }
+        [StringLength(30)]
+        public string? Genre { get; set; }
 
-        [InverseProperty("IdfilmNavigation")]
+        [InverseProperty(nameof(Notation.FilmNote))]
         public virtual ICollection<Notation> NotesFilm { get; set; } = new List<Notation>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Intrinsics.X86;
@@ -24,19 +25,23 @@ namespace Api_Film_P1.Models.EntityFramework
         public string? Prenom { get; set; }
 
         [Column("utl_mobile", TypeName = "char(10)")]
+        [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Le numero de telephone n'a pas le bon format (0123456789)")]
         [StringLength(10)]
         public string? Mobile { get; set; }
 
+        [Required]
         [Column("utl_mail")]
-        [StringLength(100)]
+        [EmailAddress]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "La longueur d’un email doit être comprise entre 6 et 100 caractères.")]
         public string? Mail { get; set; }
 
         [Column("utl_pwd")]
         [StringLength(64)]
+        [PasswordPropertyText]
         public string? Pwd { get; set; }
 
         [Column("utl_rue")]
-        [StringLength(64)]
+        [StringLength(200)]
         public string? Rue { get; set; }
 
         [Column("utl_cp", TypeName = "char(5)")]
@@ -57,10 +62,10 @@ namespace Api_Film_P1.Models.EntityFramework
         [Column("utl_longitude")]
         public float? Longitude { get; set; }
 
-        [Column("utl_datecreation")]
+        [Column("utl_datecreation", TypeName = "date")]
         public DateTime DateCreation { get; set; } = DateTime.Now;
 
-        [InverseProperty("IdutilisateurNavigation")]
+        [InverseProperty(nameof(Notation.UtilisateurNotant))]
         public virtual ICollection<Notation> NotesUtilisateur { get; set; } = new List<Notation>();
 
     }
