@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Intrinsics.X86;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api_Film_P1.Models.EntityFramework
@@ -68,5 +69,9 @@ namespace Api_Film_P1.Models.EntityFramework
         [InverseProperty(nameof(Notation.UtilisateurNotant))]
         public virtual ICollection<Notation> NotesUtilisateur { get; set; } = new List<Notation>();
 
+        public static explicit operator Utilisateur(Task<ActionResult<Utilisateur>> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
