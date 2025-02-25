@@ -1,4 +1,6 @@
+using Api_Film_P1.Models.DataManager;
 using Api_Film_P1.Models.EntityFramework;
+using Api_Film_P1.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api_Film_P1
@@ -18,6 +20,8 @@ namespace Api_Film_P1
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IDataRepository<Utilisateur>, UtilisateurManager>();
 
             var app = builder.Build();
 
